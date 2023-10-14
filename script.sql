@@ -49,5 +49,29 @@ END;
 $$
 
 
+--exercicio 1.3
 
+DO
+$$
+DECLARE
+    x INT := 6;
+    y INT := -5;
+    soma_impares INT := 0;
+BEGIN
+    IF x > y THEN
+        x := x + y;
+        y := x - y;
+        x := x - y;
+    END IF;
+
+    FOR i IN x..y
+    LOOP
+        IF i % 2 <> 0 AND i <> x AND i <> y THEN
+            soma_impares := soma_impares + i;
+        END IF;
+    END LOOP;
+
+    RAISE NOTICE 'A soma dos valores ímpares entre % e % é: %', x, y, soma_impares;
+END;
+$$
 
