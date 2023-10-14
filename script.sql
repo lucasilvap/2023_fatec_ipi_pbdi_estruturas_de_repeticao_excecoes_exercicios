@@ -108,5 +108,41 @@ END $$;
 
 
 
+--1.5.  Faça um programa que calcule o determinante de uma matriz quadrada de ordem 3
+-- utilizando a regra de Sarrus.
+-- Preencha a matriz com valores inteiros aleatórios no intervalo de 1 a 12.
+DO $$
+DECLARE
+    -- Criar uma matriz 3x3 com valores aleatórios entre 1 e 12
+    matriz INTEGER[][] := ARRAY[
+        ARRAY[random() * 11 + 1, random() * 11 + 1, random() * 11 + 1],
+        ARRAY[random() * 11 + 1, random() * 11 + 1, random() * 11 + 1],
+        ARRAY[random() * 11 + 1, random() * 11 + 1, random() * 11 + 1]
+    ];
+    -- Inicializar as variáveis para armazenar as somas das diagonais
+    soma_esq INTEGER := 0;
+    soma_dir INTEGER := 0;
+    -- Inicializar a variável para armazenar o determinante
+    det INTEGER := 0;
+BEGIN
+    -- Mostrar a matriz gerada
+    RAISE NOTICE 'Matriz: %', matriz;
+    
+    -- Calcular a soma das diagonais da esquerda para a direita
+    soma_esq := matriz[1][1] * matriz[2][2] * matriz[3][3] +
+                matriz[1][2] * matriz[2][3] * matriz[3][1] +
+                matriz[1][3] * matriz[2][1] * matriz[3][2];
+    
+    -- Calcular a soma das diagonais da direita para a esquerda
+    soma_dir := matriz[1][3] * matriz[2][2] * matriz[3][1] +
+                matriz[1][1] * matriz[2][3] * matriz[3][2] +
+                matriz[1][2] * matriz[2][1] * matriz[3][3];
+    
+    -- Calcular o determinante como a diferença entre as somas
+    det := soma_esq - soma_dir;
+    
+    -- Mostrar o resultado
+    RAISE NOTICE 'Determinante: %', det;
+END $$;
 
 
