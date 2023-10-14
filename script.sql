@@ -75,3 +75,38 @@ BEGIN
 END;
 $$
 
+
+--exercicio 1.4
+
+DO $$
+DECLARE
+    M INTEGER; -- Valor gerado aleatoriamente.
+    N INTEGER; -- Valor gerado aleatoriamente.
+    soma INTEGER := 0;
+    i INTEGER;
+BEGIN
+    -- Gere os valores iniciais para M e N.
+    M := (RANDOM() * 100)::integer; -- Substitua por um valor gerado aleatoriamente.
+    N := (RANDOM() * 100)::integer; -- Substitua por um valor gerado aleatoriamente.
+	
+	RAISE NOTICE 'Os números gerados aleatoriamente são N=% e M=%', N, M;
+
+    IF M < N THEN
+        FOR i IN M..N LOOP
+            RAISE NOTICE '%', i;
+            soma := soma + i;
+        END LOOP;
+    ELSE 
+        FOR i IN N..M LOOP
+            RAISE NOTICE '%', i;
+            soma := soma + i;
+        END LOOP;
+    END IF;
+
+    RAISE NOTICE 'Soma=%', soma;
+END $$;
+
+
+
+
+
